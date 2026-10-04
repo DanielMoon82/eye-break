@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+}
+
+// CI 에서는 실행 번호로 자동 증가 (스토어 업로드마다 커져야 함)
+def buildNumber = (System.getenv('VERSION_CODE') ?: '1') as Integer
+
+android {
+    namespace 'io.github.danielmoon82.eyebreak'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'io.github.danielmoon82.eyebreak'
+        minSdk 24
+        targetSdk 36
+        versionCode buildNumber
+        versionName "1.0.${buildNumber}"
+    }
+
+    signingConfigs {
+        release {
+            // 서명 키는 저장소에 두지 않는다 — CI 가 시크릿에서 풀어 경로·비밀번호를 넘긴다
+            def ks = System.getenv('KEYSTORE_PATH')
+            if (ks) {
+                storeFile file(ks)
+                storeType 'PKCS12'
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias 'upload'
+                keyPassword System.getenv('KEYSTORE_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.3'
+}

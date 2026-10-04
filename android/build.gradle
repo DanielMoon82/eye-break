@@ -1,0 +1,5 @@
+// 안드로이드 앱 = 웹사이트를 Chrome 으로 전체 화면에 띄우는 TWA(Trusted Web Activity).
+// 버전은 Google 공식 생성기(Bubblewrap) 템플릿을 따른다.
+plugins {
+    id 'com.android.application' version '8.9.1' apply false
+}
