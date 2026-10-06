@@ -176,11 +176,12 @@
 
   function frame(now) {
     if (!running) return;
-    if (!paused) elapsed += (now - lastTick) / 1000;
+    // rAF 타임스탬프는 시작 시점에 잰 performance.now() 보다 앞설 수 있다 — 음수 경과가 되면 단계 번호가 -1 이 되어 멈춘다
+    if (!paused) elapsed += Math.max(0, now - lastTick) / 1000;
     lastTick = now;
     if (elapsed >= TOTAL) return finish();
 
-    const i = Math.min(EXERCISES.length - 1, Math.floor(elapsed / STEP));
+    const i = Math.max(0, Math.min(EXERCISES.length - 1, Math.floor(elapsed / STEP)));
     if (i !== curIdx) enterStep(i);
     const ex = EXERCISES[i], t = elapsed - i * STEP;
 

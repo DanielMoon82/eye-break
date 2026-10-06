@@ -1,6 +1,6 @@
 // 서비스 워커 — 앱 파일을 모두 캐시해 오프라인에서도 운동할 수 있게 한다.
 // 파일을 고치면 CACHE 버전을 올릴 것.
-const CACHE = "eyebreak-v1";
+const CACHE = "eyebreak-v2";
 const FILES = ["./", "index.html", "style.css", "app.js", "manifest.webmanifest", "privacy.html", "icons/icon-192.png", "icons/icon-512.png"];
 
 self.addEventListener("install", (event) => {
