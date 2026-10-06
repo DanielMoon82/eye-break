@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 웹앱 배경(해 질 녘 하늘 윗부분, style.css --sky-top)과 맞춘다 -->
+<!-- 웹앱 배경(해 질 녘 하늘 윗부분, style.css 의 sky-top 변수)과 맞춘다 -->
 <resources>
     <color name="statusBar">#1D1B3A</color>
     <color name="statusBarDark">#1D1B3A</color>
